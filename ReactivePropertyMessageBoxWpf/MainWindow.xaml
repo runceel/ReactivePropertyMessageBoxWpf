@@ -8,6 +8,7 @@
     Title="MainWindow"
     Width="800"
     Height="450"
+    Closed="Window_Closed"
     d:DataContext="{d:DesignInstance Type=local:MainWindowViewModel,
                                      IsDesignTimeCreatable=False}"
     mc:Ignorable="d">
