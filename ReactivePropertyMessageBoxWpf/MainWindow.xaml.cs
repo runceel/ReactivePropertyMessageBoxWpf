@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reactive.Bindings.Notifiers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,13 @@ namespace ReactivePropertyMessageBoxWpf
         public MainWindow()
         {
             InitializeComponent();
+            var messageBroker = new AsyncMessageBroker();
+            DataContext = new MainWindowViewModel(messageBroker);
+            messageBroker.Subscribe<AlertMessage>((message) =>
+            {
+                message.MessageBoxResult = MessageBox.Show(message.Content, message.Title);
+                return Task.CompletedTask;
+            });
         }
     }
 }
