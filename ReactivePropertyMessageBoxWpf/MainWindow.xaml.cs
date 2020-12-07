@@ -26,9 +26,9 @@ namespace ReactivePropertyMessageBoxWpf
             InitializeComponent();
             var messageBroker = new AsyncMessageBroker();
             DataContext = new MainWindowViewModel(messageBroker);
-            messageBroker.Subscribe<AlertMessage>((message) =>
+            messageBroker.Subscribe<ConfirmMessage>((message) =>
             {
-                message.MessageBoxResult = MessageBox.Show(message.Content, message.Title);
+                message.MessageBoxResult = MessageBox.Show(message.Content, message.Title, MessageBoxButton.OKCancel);
                 return Task.CompletedTask;
             });
         }

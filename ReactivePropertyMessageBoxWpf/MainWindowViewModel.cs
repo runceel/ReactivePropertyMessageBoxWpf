@@ -26,7 +26,7 @@ namespace ReactivePropertyMessageBoxWpf
             AlertCommand = new AsyncReactiveCommand()
                 .WithSubscribe(async () =>
                 {
-                    var alertMessage = new AlertMessage
+                    var alertMessage = new ConfirmMessage
                     {
                         Title = "Info",
                         Content = "Hello world",

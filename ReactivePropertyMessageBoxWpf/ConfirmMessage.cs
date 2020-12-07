@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace ReactivePropertyMessageBoxWpf
 {
-    public class AlertMessage
+    public class ConfirmMessage
     {
         public string Title { get; init; }
         public string Content { get; init; }
