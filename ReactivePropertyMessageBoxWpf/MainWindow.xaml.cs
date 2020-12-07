@@ -29,9 +29,10 @@ namespace ReactivePropertyMessageBoxWpf
         {
             InitializeComponent();
 
-            AsyncMessageBroker = new AsyncMessageBroker().AddTo(Disposables);
+            AsyncMessageBroker = new AsyncMessageBroker()
+                .AddConfirmMessage()
+                .AddTo(Disposables);
             DataContext = new MainWindowViewModel(AsyncMessageBroker);
-            AsyncMessageBroker.AddConfirmMessage().AddTo(Disposables);
         }
 
         private void Window_Closed(object sender, EventArgs e) => Disposables.Dispose();

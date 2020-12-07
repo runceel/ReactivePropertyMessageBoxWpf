@@ -1,8 +1,5 @@
 ﻿using Reactive.Bindings.Notifiers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -17,11 +14,16 @@ namespace ReactivePropertyMessageBoxWpf
 
     public static class IAsyncMessageSubscriberExtensions
     {
-        public static IDisposable AddConfirmMessage(this IAsyncMessageSubscriber self) => 
-            self.Subscribe<ConfirmMessage>((message) =>
+        public static T AddConfirmMessage<T>(this T self, Action<IDisposable> addTo = null)
+            where T : IAsyncMessageSubscriber
+        {
+            var disposable = self.Subscribe<ConfirmMessage>((message) =>
             {
                 message.MessageBoxResult = MessageBox.Show(message.Content, message.Title, MessageBoxButton.OKCancel);
                 return Task.CompletedTask;
             });
+            addTo?.Invoke(disposable);
+            return self;
+        }
     }
 }
